@@ -1,4 +1,55 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candy Crush</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add your CSS styles here */
+        #score {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Candy Crush</h1>
+    <div id="game-board">
+        <!-- Your game board elements go here -->
+    </div>
+    <div id="score">Score: 0</div>
+    <script src="app.js"></script>
+    <script>
+        // JavaScript code for updating the score
+        let score = 0;
+
+        function updateScore(points) {
+            score += points;
+            document.getElementById('score').innerText = `Score: ${score}`;
+        }
+
+        function checkMatch() {
+            // Existing logic for checking matches
+            // Assume matchFound is a boolean that becomes true when a match is found
+            const matchFound = true; // Replace with actual match detection logic
+            if (matchFound) {
+                updateScore(10); // Add points for a match
+            }
+        }
+
+        // Example game initialization logic
+        function initializeGame() {
+            // Call checkMatch function for demonstration purposes
+            checkMatch();
+        }
+
+        // Initialize the game when the page loads
+        window.onload = initializeGame;
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">

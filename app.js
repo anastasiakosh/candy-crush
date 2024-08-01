@@ -1,4 +1,85 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.querySelector('.grid');
+    const scoreDisplay = document.getElementById('score');
+    const timerElement = document.getElementById('timer');
+    const width = 8;
+    const squares = [];
+    let score = 0;
+    let timeRemaining = 60;
+
+    const candyColors = [
+        'url(images/red-candy.png)',
+        'url(images/yellow-candy.png)',
+        'url(images/orange-candy.png)',
+        'url(images/purple-candy.png)',
+        'url(images/green-candy.png)',
+        'url(images/blue-candy.png)'
+    ];
+
+    const matchSound = new Audio('path/to/match-sound.mp3');
+    const endSound = new Audio('path/to/end-sound.mp3');
+
+    // Create your board
+    function createBoard() {
+        for (let i = 0; i < width * width; i++) {
+            const square = document.createElement('div');
+            square.setAttribute('draggable', true);
+            square.setAttribute('id', i);
+            let randomColor = Math.floor(Math.random() * candyColors.length);
+            square.style.backgroundImage = candyColors[randomColor];
+            grid.appendChild(square);
+            squares.push(square);
+        }
+    }
+
+    function updateScore(points) {
+        score += points;
+        scoreDisplay.innerText = `Score: ${score}`;
+    }
+
+    function playSound(sound) {
+        sound.play();
+    }
+
+    function checkMatch() {
+        const matchFound = true; // Replace with actual match detection logic
+        if (matchFound) {
+            updateScore(10); // Add points for a match
+            playSound(matchSound); // Play match sound
+        }
+    }
+
+    function startTimer() {
+        const timerInterval = setInterval(() => {
+            timeRemaining--;
+            timerElement.innerText = `Time: ${timeRemaining}`;
+            if (timeRemaining <= 0) {
+                clearInterval(timerInterval);
+                endGame();
+            }
+        }, 1000);
+    }
+
+    function endGame() {
+        playSound(endSound);
+        alert(`Time's up! Your final score is ${score}`);
+        // Optionally, reset the game or provide options to restart
+    }
+
+    // Initialize the game when the page loads
+    window.onload = () => {
+        createBoard();
+        startTimer();
+        // Add event listeners or other initialization code here
+    };
+
+    // Example game initialization logic
+    function initializeGame() {
+        // Call checkMatch function for demonstration purposes
+        checkMatch();
+    }
+});
+document.addEventListener('DOMContentLoaded', () => {
 const grid = document.querySelector('.grid')
 const scoreDisplay = document.getElementById('score')
 const width = 8
